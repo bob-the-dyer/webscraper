@@ -18,7 +18,7 @@ Console web scraper (http://en.wikipedia.org/wiki/Web_scraping) utility which:
 
 3) No third-party libraries are used
 
-Data processing results are printed to output for each web resources separately and for all resources as total.
+4) Data processing results are printed to output for each web resources separately and for all resources as total.
 
 Command line parameters example for Java implementation:
 

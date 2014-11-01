@@ -34,4 +34,4 @@ Additional info
 ===============
 Maven 3.1.1+
 
-Java 1.7+
+Java 1.8+

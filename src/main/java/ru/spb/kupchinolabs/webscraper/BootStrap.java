@@ -6,6 +6,8 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
+import org.apache.commons.cli.*;
+
 public class BootStrap {
 
     final static private String help =
@@ -20,39 +22,41 @@ public class BootStrap {
                     "       –c[hars on page]\n" +
                     "       –e[xtract sentences with words]\n";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         System.out.println("=====================");
         System.out.println("==  webscraper 1.0 ==");
         System.out.println("=====================");
-        if (args == null || args.length < 2) {
-            System.out.println("At least URL, one word or one command should be provided as arguments.\n" + help);
-            throw new IllegalArgumentException();
+
+        Options options = new Options();
+        options.addOption(new Option("w", false, "count number of provided word(s) occurrences on webpage(s)"));
+        options.addOption(new Option("c", false, "count number of characters of each web page"));
+        options.addOption(new Option("e", false, "extract sentences which contain given words"));
+        options.addOption(new Option("v", false, "output verbosity flag, if on then the output should contains information about time spent on data scraping and data processing"));
+        options.addOption(OptionBuilder.withArgName("path")
+                .hasArg()
+                .withDescription("path to plain text file containing a list of URLs")
+                .create("file"));
+        options.addOption(OptionBuilder.withArgName("url")
+                .hasArg()
+                .withDescription("web resources URL")
+                .create("url"));
+        options.addOption(OptionBuilder.withArgName("words")
+                .hasArg()
+                .withDescription("word or list of words with “,” delimiter")
+                .create("words"));
+
+        CommandLineParser parser = new BasicParser();
+        CommandLine cmd;
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java –jar scraper-jar-with-dependencies.jar", options, true);
+            throw e;
         }
-        final String url = args[0];
-        if (url == null || url.length() == 0 || (!url.startsWith("http://") && !url.startsWith("file://"))) {
-            System.out.println("Url is not specified\n" + help);
-            throw new IllegalArgumentException();
-        }
-        final String arg1 = args[1];
-        if (args.length == 2) {
-            if ("-c".equalsIgnoreCase(arg1)) {
-                System.out.println("Counting the number of chars for url(s)");
-                //TODO 1
-            } else {
-                System.out.println("Words and commands must be specified\n" + help);
-                throw new IllegalArgumentException();
-            }
-        } else {
-            final String arg2 = args[2];
-            if (args.length == 3) {
-                if ("-c".equalsIgnoreCase(arg1) && "-v".equalsIgnoreCase(arg2) || "-c".equalsIgnoreCase(arg2) && "-v".equalsIgnoreCase(arg1)) {
-                    System.out.println("Counting the number of chars for url(s) in verbose mode");
-                    //TODO 2
-                } else {
-                    System.out.println("Confusing list of commands\n" + help);
-                    throw new IllegalArgumentException();
-                }
-            }
-        }
+
+        //TODO next check options and start logic
+
     }
 }

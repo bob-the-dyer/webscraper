@@ -22,6 +22,21 @@ Command line parameters example
 -------------------------------
 
     java –jar webscraper-jar-with-dependencies.jar -url http://www.cnn.com -words Greece,default –v –w –c –e
+    
+    
+What webscraper won’t do
+------------------------
+
+  1. Won’t process urls recursively, for traversing all urls web crawler should be used instead, list of pages could be provided in a file instead
+  
+  2. Won’t scrap dynamical pages (Javascript + AJAX), just statical pages __well-formed HTML only__
+  
+  3. No authentication and popups handling capabilities
+  
+  4. No proxy support at the moment
+  
+  5. No https support
+
 
 Build from sources
 ------------------

@@ -19,17 +19,17 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility which:
 3. Data processing results are printed to output for each web resources separately and for all resources as total.
 
 Command line parameters example
-===============================
+-------------------------------
 
     java –jar scraper.jar http://www.cnn.com Greece,default –v –w –c –e
 
 Build from sources
-==================
+------------------
 
     mvn install
 
-Additional info
-===============
+Prerequisites
+-------------
 Maven 3.1.1+
 
 Java 1.8+

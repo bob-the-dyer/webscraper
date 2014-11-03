@@ -26,17 +26,17 @@ Command line parameters example
 What webscraper won’t do
 ------------------------
 
-1. Won’t process urls recursively, for traversing all urls web crawler should be used instead, list of pages could be provided in a file instead
+1. Won’t process urls recursively, for traversing all urls web crawler should be used instead, list of pages could be provided in a file instead.
   
-2. Won’t scrap dynamical pages (Javascript + AJAX)
+2. Won’t scrap dynamical pages (Javascript + AJAX).
   
-3. Process statical pages with __well-formed HTML only__
+3. Process statical pages with __well-formed HTML only__.  HtmlCleaner could be plugged in for converting any html to XML compliant.
   
-4. No authentication and popups handling capabilities
+4. No authentication and popups handling capabilities.
 
-5. No https support
+5. No https support.
   
-6. No proxy support at the moment
+6. No proxy support at the moment.
   
 Build from sources
 ------------------

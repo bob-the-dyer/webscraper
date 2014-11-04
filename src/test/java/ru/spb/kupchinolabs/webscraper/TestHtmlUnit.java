@@ -40,6 +40,7 @@ public class TestHtmlUnit {
         System.out.println(((HtmlPage) webClient.getPage("http://vk.com/feed")).asText());
         System.out.println(((HtmlPage) webClient.getPage("https://www.linkedin.com")).asText());
         System.out.println(((HtmlPage) webClient.getPage("http://zenhabits.net")).asText());
+        System.out.println(((HtmlPage) webClient.getPage("http://en.wikipedia.org/wiki/Web_scraping")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://habrahabr.ru")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://lifehacker.ru")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://fishki.net")).asText());

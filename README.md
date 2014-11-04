@@ -30,7 +30,7 @@ What webscraper does and does not
   
 2. Does not scrap dynamical pages with Javascript and AJAX.
   
-3. Process statical pages with __well-formed HTML only__.  HtmlCleaner could be considered to be plugged in order to convert any html to XML compliant document.
+3. Processes statical pages with __well-formed HTML only__.  HtmlCleaner could be considered to be plugged in order to convert any html to XML compliant document.
   
 4. No authentication and popups handling capabilities.
 

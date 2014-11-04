@@ -6,8 +6,12 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
+import org.omg.CORBA.INTERNAL;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class FrameTester {
@@ -27,17 +31,33 @@ public class FrameTester {
 
         JFrame f = new JFrame("webscraper");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.getContentPane().setLayout(new BorderLayout());
+        f.getContentPane().setLayout(new FlowLayout());
         f.getContentPane().add(jSplitPane);
         f.setSize(800, 600);
         f.setVisible(true);
 
-        Toolkit.getDefaultToolkit();
-
         final Robot robot = new Robot();
+        robot.setAutoDelay(40);
+        robot.setAutoWaitForIdle(true);
 
+        jep.requestFocus();
 
-        jep.copy();       // TODO how to select all
+        final Point upperLeftPoint = jep.getVisibleRect().getLocation();
+
+        robot.delay(4000);
+        robot.mouseMove(upperLeftPoint.x, upperLeftPoint.y);
+        robot.delay(500);
+
+        robot.mousePress(InputEvent.BUTTON1_MASK);
+        robot.delay(200);
+
+        robot.mouseMove(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        robot.delay(500);
+
+        robot.mouseRelease(InputEvent.BUTTON1_MASK);
+        robot.delay(200);
+
+        jep.copy();
         tf.paste();
         System.out.println(tf.getText());
     }

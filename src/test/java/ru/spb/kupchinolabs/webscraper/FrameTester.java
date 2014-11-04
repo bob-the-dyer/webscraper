@@ -22,13 +22,14 @@ public class FrameTester {
         JScrollPane scrollPane1 = new JScrollPane(jep);
         JScrollPane scrollPane2 = new JScrollPane(tf);
 
+        JSplitPane jSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane1, scrollPane2);
+        jSplitPane.setDividerLocation(0.5);
 
         JFrame f = new JFrame("webscraper");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.getContentPane().setLayout(new BorderLayout());
-//        f.getContentPane().add(scrollPane1);
-        f.getContentPane().add(scrollPane2);
-        f.setSize(512, 342);
+        f.getContentPane().add(jSplitPane);
+        f.setSize(800, 600);
         f.setVisible(true);
 
         Toolkit.getDefaultToolkit();

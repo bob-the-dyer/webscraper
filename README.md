@@ -30,7 +30,7 @@ What webscraper won’t do
   
 2. Won’t scrap dynamical pages (Javascript + AJAX).
   
-3. Process statical pages with __well-formed HTML only__.  HtmlCleaner could be plugged in for converting any html to XML compliant.
+3. Process statical pages with __well-formed HTML only__.  HtmlCleaner could be plugged in for converting any html to XML compliant document.
   
 4. No authentication and popups handling capabilities.
 

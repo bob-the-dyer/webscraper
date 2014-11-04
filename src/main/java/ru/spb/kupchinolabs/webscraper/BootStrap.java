@@ -17,7 +17,7 @@ public class BootStrap {
     public static final String FILE_OPTION = "file";
     public static final String URL_OPTION = "url";
     public static final String WORDS_OPTION = "words";
-    public static final String COMMAND_LINE_EXAMPLE = "java –jar webscraper-jar-with-dependencies.jar";
+    public static final String COMMAND_LINE_EXAMPLE = "java -jar webscraper-jar-with-dependencies.jar";
 
     public static void main(String[] args) {
         System.out.println("================================");

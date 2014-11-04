@@ -6,6 +6,7 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
+import de.saxsys.javafx.test.JfxRunner;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,16 +14,18 @@ import javafx.concurrent.Worker;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 import static org.junit.Assert.assertTrue;
 
+@RunWith(JfxRunner.class)
 public class TestHeadless {
     @Test(expected = HeadlessException.class)
     public void testHeadlessPanel() throws IOException {
@@ -40,33 +43,37 @@ public class TestHeadless {
         System.out.println(Toolkit.getDefaultToolkit().getSystemClipboard());
     }
 
+    @Test(expected = AWTException.class)
+    public void testHeadlessRobot() throws AWTException {
+        System.setProperty("java.awt.headless", "true");
+        final Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_CAPS_LOCK);
+    }
+
     @Test
     public void testWebEngine() {
-        final Stage stage = null;
         System.setProperty("java.awt.headless", "true");
-        JFXPanel fxPanel = new JFXPanel();
         CountDownLatch latch = new CountDownLatch(1);
-        Platform.runLater(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        final WebView webView = new WebView();
-                        final WebEngine webEngine = webView.getEngine();
-                        webEngine.getLoadWorker().stateProperty().addListener(
-                                new ChangeListener<Worker.State>() {
-                                    @Override
-                                    public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                                        if (newValue == Worker.State.SUCCEEDED) {
-                                            System.out.println(webEngine.getDocument());
-                                            //TODO process DOM?
-                                            latch.countDown();
-                                        }
-                                    }
-                                });
-                        webEngine.load("http://javafx.com");
-                    }
-                }
-        );
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                new JFXPanel();
+                final WebView webView = new WebView();
+                final WebEngine webEngine = webView.getEngine();
+                webEngine.getLoadWorker().stateProperty().addListener(
+                        new ChangeListener<Worker.State>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                                if (newValue == Worker.State.SUCCEEDED) {
+                                    System.out.println(webEngine.getDocument());
+                                    //TODO process DOM?
+                                    latch.countDown();
+                                }
+                            }
+                        });
+                webEngine.load("http://javafx.com");
+            }
+        });
         try {
             latch.await();
         } catch (InterruptedException e) {

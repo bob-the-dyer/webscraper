@@ -12,9 +12,9 @@ import java.io.IOException;
 
 public class FrameTester {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, AWTException {
         final JEditorPane jep = new JEditorPane();
-        jep.setEnabled(false);
+//        jep.setEnabled(false);
         jep.setPage("http://www.htmlunit.sourceforge.net");
 
         final JTextArea tf = new JTextArea();
@@ -33,6 +33,8 @@ public class FrameTester {
         f.setVisible(true);
 
         Toolkit.getDefaultToolkit();
+
+        final Robot robot = new Robot();
 
 
         jep.copy();       // TODO how to select all

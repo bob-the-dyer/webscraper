@@ -64,7 +64,7 @@ public class BootStrap {
             return new BasicParser().parse(options, args);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            new HelpFormatter().printHelp("java –jar webscraper-jar-with-dependencies.jar", options, true);
+            new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, options, true);
             return null;
         }
     }

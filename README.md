@@ -21,7 +21,7 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility which:
 Command line parameters example
 -------------------------------
 
-    java –jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words Greece,default –v –w –c –e   
+    java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler -v -w -c -e   
     
 What webscraper won’t do
 ------------------------

@@ -6,6 +6,7 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
@@ -30,6 +31,18 @@ public class TestHtmlUnit {
         final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
         final String pageAsText = page.asText();
         assertTrue(pageAsText.contains("It is typically used for testing purposes or to retrieve information from web sites"));
+    }
+
+    @Test
+    public void testMyUrls() throws IOException {
+        final WebClient webClient = new WebClient();
+        System.out.println(((HtmlPage) webClient.getPage("https://www.facebook.com")).asText());
+        System.out.println(((HtmlPage) webClient.getPage("http://vk.com/feed")).asText());
+        System.out.println(((HtmlPage) webClient.getPage("https://www.linkedin.com")).asText());
+        System.out.println(((HtmlPage) webClient.getPage("http://zenhabits.net")).asText());
+// BAD       System.out.println(((HtmlPage) webClient.getPage("http://habrahabr.ru")).asText());
+// BAD       System.out.println(((HtmlPage) webClient.getPage("http://lifehacker.ru")).asText());
+// BAD       System.out.println(((HtmlPage) webClient.getPage("http://fishki.net")).asText());
     }
 
 }

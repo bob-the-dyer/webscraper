@@ -43,7 +43,7 @@ public class BootStrap {
                 goodOptions = true;
             }
             if (!goodOptions) {
-                System.out.println("Neither " + WORDS_COUNT_OPTION + " nor " + CHARS_COUNT_OPTION + " commands were specified correctly.");
+                System.out.println("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
                 new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, constructOptions(), true);
             }
             return goodOptions;

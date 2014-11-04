@@ -38,7 +38,7 @@ public class BootStrap {
                 .create("url"));
         options.addOption(OptionBuilder.withArgName("words")
                 .hasArg()
-                .withDescription("word or list of words with “,” delimiter")
+                .withDescription("word or list of words with ',' delimiter")
                 .create("words"));
 
         try {

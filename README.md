@@ -37,6 +37,8 @@ What webscraper does and does not
 5. No https support, no cookies support.
   
 6. No proxy support at the moment.
+
+7. Uses [HtmlUnit](http://htmlunit.sourceforge.net) under the hood.
   
 Build from sources
 ------------------

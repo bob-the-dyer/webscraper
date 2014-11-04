@@ -14,6 +14,7 @@ import javafx.concurrent.Worker;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,6 +27,7 @@ import java.util.concurrent.CountDownLatch;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(JfxRunner.class)
+@Ignore("looks like headless awt is not our case")
 public class TestHeadless {
     @Test(expected = HeadlessException.class)
     public void testHeadlessPanel() throws IOException {

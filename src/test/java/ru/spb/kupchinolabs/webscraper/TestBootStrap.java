@@ -16,14 +16,14 @@ public class TestBootStrap {
     @Test
     public void testGoodArgs() throws Exception {
         final BootStrap bootStrap = new BootStrap();
-        assertNotNull(bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-words", "Greece,default", "–v", "–w", "–c", "–e"}));
+        assertNotNull(bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "Greece,default", "–v", "–w", "–c", "–e"}));
         assertNotNull(bootStrap.cmd(new String[]{"-file", "/Users/scraper-jar-with-dependencies.jar", "-words", "Greece", "–w", "–c"}));
     }
 
     @Test
     public void testUnknownArgs() throws Exception {
         final BootStrap bootStrap = new BootStrap();
-        final CommandLine cmd = bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-swords", "Greece,default", "–g", "–h", "–m", "–l"});
+        final CommandLine cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-swords", "Greece,default", "–g", "–h", "–m", "–l"});
         assertNull(cmd);
     }
 
@@ -37,13 +37,13 @@ public class TestBootStrap {
     @Test
     public void testMandatoryCommandsWordsAndCounts() {
         final BootStrap bootStrap = new BootStrap();
-        CommandLine cmd = bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-words", "Greece,default", "-v"});
+        CommandLine cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "Greece,default", "-v"});
         assertFalse(bootStrap.dispatchProcessing(cmd));
-        cmd = bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-w"});
+        cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-w"});
         assertFalse(bootStrap.dispatchProcessing(cmd));
-        cmd = bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-words", "Greece,default", "-c"});
+        cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "Greece,default", "-c"});
         assertTrue(bootStrap.dispatchProcessing(cmd));
-        cmd = bootStrap.cmd(new String[]{"-url", "http://www.cnn.com", "-c"});
+        cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-c"});
         assertTrue(bootStrap.dispatchProcessing(cmd));
     }
 }

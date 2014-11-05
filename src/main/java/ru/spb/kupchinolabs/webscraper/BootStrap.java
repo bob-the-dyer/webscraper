@@ -8,22 +8,13 @@ package ru.spb.kupchinolabs.webscraper;
 
 import org.apache.commons.cli.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static java.lang.System.err;
 import static java.lang.System.out;
+import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
 public class BootStrap {
 
-    public static final String WORDS_COUNT_OPTION = "w";
-    public static final String CHARS_COUNT_OPTION = "c";
-    public static final String SENTENCES_OPTION = "e";
-    public static final String VERBOSE_OPTION = "v";
-    public static final String FILE_OPTION = "file";
-    public static final String URL_OPTION = "url";
-    public static final String WORDS_OPTION = "words";
-    public static final String COMMAND_LINE_EXAMPLE = "java -jar webscraper-jar-with-dependencies.jar";
+    final static private Options options = constructOptions();
 
     public static void main(String[] args) {
         out.println("!===============================!");
@@ -36,9 +27,10 @@ public class BootStrap {
             try {
                 dispatchProcessing(cmd);
             } catch (Exception e) {
-                err.println("-----------------------------------------------------------------");
-                err.println("-- Webscraper has done with some errors:" + e.getMessage() + " --");
-                err.println("-----------------------------------------------------------------");
+                err.println("------------------------------------------");
+                err.println("-- Webscraper has done with some errors --");
+                err.println("------------------------------------------");
+                e.printStackTrace();
                 return;
             }
             out.println("++++++++++++++++++++++++++++++++++++++++");
@@ -48,41 +40,10 @@ public class BootStrap {
     }
 
     protected static boolean dispatchProcessing(CommandLine cmd) {
-        if (cmd.hasOption(URL_OPTION)) {
-            boolean goodOptions = false;
-            if (cmd.hasOption(WORDS_OPTION) && cmd.hasOption(WORDS_COUNT_OPTION)) {
-                boolean verbose = false;
-                if (cmd.hasOption(VERBOSE_OPTION)) {
-                    verbose = true;
-                }
-                final String url = cmd.getOptionValue(URL_OPTION);
-                final String words = cmd.getOptionValue(WORDS_OPTION);
-                final List<ScrapResult> results = new UrlScraper().scrap(url, Arrays.asList(words.split(",")));
-                new ScrapResultDumper().dump(results);
-                goodOptions = true;
-            }
-            if (cmd.hasOption(CHARS_COUNT_OPTION)) {
-                //TODO logic for url and chars counting
-                goodOptions = true;
-            }
-            if (!goodOptions) {
-                out.println("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
-                new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, constructOptions(), true);
-            }
-            return goodOptions;
-        } else if (cmd.hasOption(FILE_OPTION)) {
-            out.println(FILE_OPTION + " option is not supported yet");
-            //TODO logic for file
-            return true;
-        } else {
-            out.println("Neither " + URL_OPTION + " nor " + FILE_OPTION + " commands were specified.");
-            new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, constructOptions(), true);
-            return false;
-        }
+        return ScrapController.dispatchProcessing(cmd, options);
     }
 
     protected static CommandLine cmd(String[] args) {
-        Options options = constructOptions();
         try {
             return new BasicParser().parse(options, args);
         } catch (ParseException e) {

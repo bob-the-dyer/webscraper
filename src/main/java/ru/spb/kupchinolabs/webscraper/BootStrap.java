@@ -17,9 +17,9 @@ public class BootStrap {
     final static private Options options = constructOptions();
 
     public static void main(String[] args) {
-        out.println("!===============================!");
-        out.println("!== Welcome to webscraper 1.0 ==!");
-        out.println("!===============================!");
+        out.println("-------------------------------");
+        out.println("-- Welcome to webscraper 1.0 --");
+        out.println("-------------------------------");
 
         final CommandLine cmd = cmd(args);
 
@@ -30,12 +30,12 @@ public class BootStrap {
                 err.println("------------------------------------------");
                 err.println("-- Webscraper has done with some errors --");
                 err.println("------------------------------------------");
-                e.printStackTrace();
+                err.println(e.getMessage());
                 return;
             }
-            out.println("++++++++++++++++++++++++++++++++++++++++");
-            out.println("++ Webscraper has done with no errors ++");
-            out.println("++++++++++++++++++++++++++++++++++++++++");
+            out.println("----------------------------------------");
+            out.println("-- Webscraper has done with no errors --");
+            out.println("----------------------------------------");
         }
     }
 

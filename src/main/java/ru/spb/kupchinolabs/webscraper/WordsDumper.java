@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.lang.System.out;
 
-public class UrlWordsDumper {
+public class WordsDumper {
 
     public void dump(List<ScrapResult> results) {
         for (ScrapResult result : results) {

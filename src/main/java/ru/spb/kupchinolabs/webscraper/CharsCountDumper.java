@@ -9,7 +9,7 @@ package ru.spb.kupchinolabs.webscraper;
 import static java.lang.String.format;
 import static java.lang.System.out;
 
-public class UrlCharsCountDumper {
+public class CharsCountDumper {
 
     public void dump(String url, int count) {
         out.println(format("%s has %d characters", url, count));

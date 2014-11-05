@@ -16,7 +16,7 @@ import java.util.logging.Level;
 
 import static java.lang.String.format;
 
-public class UrlWordsScraper {
+public class WordsScraper {
 
     static { //disabling loggin for HtmlUnit
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);

@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 public class TestUrlScrapper {
     @Test
     public void testWikiPage() {
-        final List<ScrapResult> scrap = new URLWordsScraper().scrap("http://en.wikipedia.org/wiki/Web_scraping", Arrays.asList("scraping", "Mining", "Crawler", "bible"));
+        final List<ScrapResult> scrap = new UrlWordsScraper().scrap("http://en.wikipedia.org/wiki/Web_scraping", Arrays.asList("scraping", "Mining", "Crawler", "bible"));
         assertEquals(34, scrap.get(0).getCount());
         assertEquals(2,  scrap.get(1).getCount());
         assertEquals(2,  scrap.get(2).getCount());

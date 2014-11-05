@@ -29,7 +29,7 @@ public class ScrapController {
                 }
                 final String url = cmd.getOptionValue(URL_OPTION);
                 final int count = new URLCharsCounter().count(url);
-                new URLCharsCountDumper().dump(url, count);
+                new UrlCharsCountDumper().dump(url, count);
                 goodOptions = true;
             }
             if (cmd.hasOption(WORDS_OPTION) && cmd.hasOption(WORDS_COUNT_OPTION)) {
@@ -39,8 +39,8 @@ public class ScrapController {
                 }
                 final String url = cmd.getOptionValue(URL_OPTION);
                 final String words = cmd.getOptionValue(WORDS_OPTION);
-                final List<ScrapResult> results = new URLWordsScraper().scrap(url, Arrays.asList(words.split(",")));
-                new URLWordsDumper().dump(results);
+                final List<ScrapResult> results = new UrlWordsScraper().scrap(url, Arrays.asList(words.split(",")));
+                new UrlWordsDumper().dump(results);
                 goodOptions = true;
             }
             if (!goodOptions) {

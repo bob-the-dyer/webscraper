@@ -39,6 +39,8 @@ What webscraper does and does not
 6. No proxy support at the moment.
 
 7. Uses [HtmlUnit](http://htmlunit.sourceforge.net) under the hood.
+
+8. No map/reduce technique at the moment, no any performance optimization 
   
 Build from sources
 ------------------

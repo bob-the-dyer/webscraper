@@ -8,6 +8,8 @@ package ru.spb.kupchinolabs.webscraper;
 
 import org.apache.commons.cli.*;
 
+import java.util.Arrays;
+
 public class BootStrap {
 
     public static final String WORDS_COUNT_OPTION = "w";
@@ -27,7 +29,12 @@ public class BootStrap {
         final CommandLine cmd = cmd(args);
 
         if (cmd != null) {
-            dispatchProcessing(cmd);
+            try {
+                dispatchProcessing(cmd);
+            } catch (Exception e) {
+                //TODO general exception handling
+                e.printStackTrace();
+            }
         }
     }
 
@@ -35,7 +42,16 @@ public class BootStrap {
         if (cmd.hasOption(URL_OPTION)) {
             boolean goodOptions = false;
             if (cmd.hasOption(WORDS_OPTION) && cmd.hasOption(WORDS_COUNT_OPTION)) {
-                //TODO logic for url and words counting
+                boolean verbose = false;
+                if (cmd.hasOption(VERBOSE_OPTION)) {
+                    verbose = true;
+                }
+                final String url = cmd.getOptionValue(URL_OPTION);
+                final String words = cmd.getOptionValue(WORDS_OPTION);
+                new UrlScraper().scrap(url, Arrays.asList(words.split(",")));
+
+                //TODO next logging
+
                 goodOptions = true;
             }
             if (cmd.hasOption(CHARS_COUNT_OPTION)) {

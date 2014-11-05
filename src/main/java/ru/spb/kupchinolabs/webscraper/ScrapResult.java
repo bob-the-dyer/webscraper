@@ -8,14 +8,14 @@ package ru.spb.kupchinolabs.webscraper;
 
 import java.util.List;
 
-final public class ScrapingResult {
+final public class ScrapResult {
 
     final private String url;
     final private String word;
     final private int count;
     final private List<String> sentences;
 
-    public ScrapingResult(String url, String word, int count, List<String> sentences) {
+    public ScrapResult(String url, String word, int count, List<String> sentences) {
         this.url = url;
         this.word = word;
         this.count = count;

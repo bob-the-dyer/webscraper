@@ -9,6 +9,10 @@ package ru.spb.kupchinolabs.webscraper;
 import org.apache.commons.cli.*;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.System.err;
+import static java.lang.System.out;
 
 public class BootStrap {
 
@@ -22,9 +26,9 @@ public class BootStrap {
     public static final String COMMAND_LINE_EXAMPLE = "java -jar webscraper-jar-with-dependencies.jar";
 
     public static void main(String[] args) {
-        System.out.println("================================");
-        System.out.println("==  Welcome to webscraper 1.0 ==");
-        System.out.println("================================");
+        out.println("!===============================!");
+        out.println("!== Welcome to webscraper 1.0 ==!");
+        out.println("!===============================!");
 
         final CommandLine cmd = cmd(args);
 
@@ -32,9 +36,14 @@ public class BootStrap {
             try {
                 dispatchProcessing(cmd);
             } catch (Exception e) {
-                //TODO general exception handling
-                e.printStackTrace();
+                err.println("-----------------------------------------------------------------");
+                err.println("-- Webscraper has done with some errors:" + e.getMessage() + " --");
+                err.println("-----------------------------------------------------------------");
+                return;
             }
+            out.println("++++++++++++++++++++++++++++++++++++++++");
+            out.println("++ Webscraper has done with no errors ++");
+            out.println("++++++++++++++++++++++++++++++++++++++++");
         }
     }
 
@@ -48,10 +57,8 @@ public class BootStrap {
                 }
                 final String url = cmd.getOptionValue(URL_OPTION);
                 final String words = cmd.getOptionValue(WORDS_OPTION);
-                new UrlScraper().scrap(url, Arrays.asList(words.split(",")));
-
-                //TODO next logging
-
+                final List<ScrapResult> results = new UrlScraper().scrap(url, Arrays.asList(words.split(",")));
+                new ScrapResultDumper().dump(results);
                 goodOptions = true;
             }
             if (cmd.hasOption(CHARS_COUNT_OPTION)) {
@@ -59,16 +66,16 @@ public class BootStrap {
                 goodOptions = true;
             }
             if (!goodOptions) {
-                System.out.println("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
+                out.println("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
                 new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, constructOptions(), true);
             }
             return goodOptions;
         } else if (cmd.hasOption(FILE_OPTION)) {
-            System.out.println(FILE_OPTION + " option is not supported yet");
+            out.println(FILE_OPTION + " option is not supported yet");
             //TODO logic for file
             return true;
         } else {
-            System.out.println("Neither " + URL_OPTION + " nor " + FILE_OPTION + " commands were specified.");
+            out.println("Neither " + URL_OPTION + " nor " + FILE_OPTION + " commands were specified.");
             new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, constructOptions(), true);
             return false;
         }
@@ -79,7 +86,7 @@ public class BootStrap {
         try {
             return new BasicParser().parse(options, args);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
             new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, options, true);
             return null;
         }

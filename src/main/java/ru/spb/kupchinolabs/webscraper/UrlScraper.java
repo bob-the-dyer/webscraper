@@ -12,11 +12,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 
 public class UrlScraper {
 
-    public List<ScrapingResult> scrap(String url, List<String> words) {
-        List<ScrapingResult> results = new LinkedList<>();
+    static { //disabling loggin for HtmlUnit
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+    }
+
+    public List<ScrapResult> scrap(String url, List<String> words) {
+        List<ScrapResult> results = new LinkedList<>();
         final WebClient webClient = new WebClient();
         final HtmlPage htmlPage;
         try {
@@ -27,7 +33,9 @@ public class UrlScraper {
         final String titleText = htmlPage.getTitleText().toLowerCase();
         final String pageAsText = htmlPage.asText().toLowerCase();
         String page = pageAsText.substring(titleText.length());
-        //TODO consider tokenizer to boost performance
+
+        //TODO consider tokenizer to boost performance and search all words within single iteration
+
         for (String word : words) {
             int wordCount = 0;
             int indexOf = 0;
@@ -36,7 +44,7 @@ public class UrlScraper {
                 wordCount++;
                 indexOf += word.length();
             }
-            results.add(new ScrapingResult(url, word, wordCount, null));
+            results.add(new ScrapResult(url, word, wordCount, null));
         }
         return results;
     }

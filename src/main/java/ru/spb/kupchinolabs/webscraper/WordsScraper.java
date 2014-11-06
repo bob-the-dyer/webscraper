@@ -30,7 +30,7 @@ public class WordsScraper {
         try {
             htmlPage = webClient.getPage(url);
         } catch (IOException e) {
-            throw new RuntimeException(format("Page %s couldn't no be scraped", url), e);
+            throw new RuntimeException(format("Page %s couldn't be scraped because of JavaScript, AJAX or other dynamical content", url), e);
         }
         final String titleText = htmlPage.getTitleText().toLowerCase();
         final String pageAsText = htmlPage.asText().toLowerCase();

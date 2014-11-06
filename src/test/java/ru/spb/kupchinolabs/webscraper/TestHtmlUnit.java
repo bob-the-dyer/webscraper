@@ -11,7 +11,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
+import static java.lang.System.out;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -35,18 +38,38 @@ public class TestHtmlUnit {
     @Test
     public void testMyUrls() throws IOException {
         final WebClient webClient = new WebClient();
-        System.out.println(((HtmlPage) webClient.getPage("https://www.facebook.com")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("http://vk.com/feed")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("https://www.linkedin.com")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("http://zenhabits.net")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("http://en.wikipedia.org/wiki/Web_scraping")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("http://plugins.jetbrains.com/plugin/7527?pr=idea")).asText());
-        System.out.println(((HtmlPage) webClient.getPage("https://github.com/bob-the-dyer/webscraper")).asText());
-// BAD       System.out.println(((HtmlPage) webClient.getPage("http://www.hireright.com")).asText());
-// BAD       System.out.println(((HtmlPage) webClient.getPage("http://drozd4j.postach.io")).asText());
-// BAD       System.out.println(((HtmlPage) webClient.getPage("http://habrahabr.ru")).asText());
-// BAD       System.out.println(((HtmlPage) webClient.getPage("http://lifehacker.ru")).asText());
-// BAD       System.out.println(((HtmlPage) webClient.getPage("http://fishki.net")).asText());
+
+        List<String> goodSites = Arrays.asList(
+                "https://www.facebook.com",
+                "https://www.google.ru",
+                "https://www.twitter.com",
+                "http://vk.com/feed",
+                "https://www.linkedin.com",
+                "http://zenhabits.net",
+                "http://en.wikipedia.org/wiki/Web_scraping",
+                "http://plugins.jetbrains.com/plugin/7527?pr=idea",
+                "https://github.com/bob-the-dyer/webscraper"
+        );
+        for (String goodSite : goodSites) {
+            out.println(((HtmlPage) webClient.getPage(goodSite)).asText());
+        }
+
+        List<String> badSites = Arrays.asList(
+                "http://www.hireright.com",
+                "http://drozd4j.postach.io",
+                "http://habrahabr.ru",
+                "http://lifehacker.ru",
+                "http://fishki.net",
+                "http://hh.ru",
+                "http://yandex.ru"
+        );
+        for (String badSite : badSites) {
+            try {
+                out.println(((HtmlPage) webClient.getPage(badSite)).asText());
+                fail();
+            } catch (Exception e) {
+            }
+        }
     }
 
 }

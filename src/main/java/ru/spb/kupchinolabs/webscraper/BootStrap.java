@@ -34,7 +34,7 @@ public class BootStrap {
                 dispatchCommands(cmd);
             } catch (Exception e) {
                 log.warning("Webscraper v0.8 has done with some errors");
-                log.warning(e.getMessage());
+                log.warning(e.getMessage() + (e.getCause() != null ? ": " + e.getCause().getMessage() : ""));
                 return;
             }
             log.info("Webscraper v0.8 has done with no errors");

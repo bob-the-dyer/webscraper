@@ -9,7 +9,6 @@ package ru.spb.kupchinolabs.webscraper;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,8 +28,8 @@ public class WordsScraper {
         final HtmlPage htmlPage;
         try {
             htmlPage = webClient.getPage(url);
-        } catch (IOException e) {
-            throw new RuntimeException(format("Page %s couldn't be scraped because of JavaScript, AJAX or other dynamical content", url), e);
+        } catch (Exception e) {
+            throw new RuntimeException(format("Page %s couldn't be scraped", url), e);
         }
         final String titleText = htmlPage.getTitleText().toLowerCase();
         final String pageAsText = htmlPage.asText().toLowerCase();

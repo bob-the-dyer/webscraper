@@ -18,11 +18,6 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility which:
  - (__not supported yet__) extract sentences which contain given words (-e)
 
 3. Data processing results are printed to output for each web resources separately and for all resources as total.
-
-Command line parameters example
--------------------------------
-
-    java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler -v -w -c -e   
     
 What webscraper does and does not
 ---------------------------------
@@ -43,16 +38,26 @@ What webscraper does and does not
 
 8. No map/reduce technique at the moment, no any performance optimization 
   
+Prerequisites
+-------------
+
+Internet connection
+
+Maven 3.1.1+ installed 
+
+Java 1.8+ installed
+
 Build from sources
 ------------------
 
+    cd webscraper
     mvn install
+    cd target
+    
+Command line parameters example
+-------------------------------
 
-Prerequisites
--------------
-Maven 3.1.1+
-
-Java 1.8+
+    java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler -v -w -c -e   
 
 Open questions
 --------------

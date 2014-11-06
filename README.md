@@ -8,14 +8,14 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility which:
  - web resource URL 
  - data command(s)
  - word or list of words with “,” delimiter
- - (_not supported yet_) path to plain text file containing a list of URLs
- - (_not supported yet_) output verbosity flag, if on then the output should contains information about time spent on data scraping and data processing (-v)
+ - (__not supported yet__) path to plain text file containing a list of URLs
+ - (__not supported yet__) output verbosity flag, if on then the output should contains information about time spent on data scraping and data processing (-v)
 
 2. supports the following data processing commands:
 
  - count number of provided word(s) occurrences on webpage(s) (-w)
  - count number of characters of each web page (-c)
- - (_not supported yet_) extract sentences which contain given words (-e)
+ - (__not supported yet__) extract sentences which contain given words (-e)
 
 3. Data processing results are printed to output for each web resources separately and for all resources as total.
 

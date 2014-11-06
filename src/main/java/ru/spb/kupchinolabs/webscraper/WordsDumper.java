@@ -7,17 +7,18 @@
 package ru.spb.kupchinolabs.webscraper;
 
 import java.util.List;
-
-import static java.lang.System.out;
+import java.util.logging.Logger;
 
 public class WordsDumper {
+
+    private final static Logger log = Logger.getLogger(WordsDumper.class.getName());
 
     public void dump(List<ScrapResult> results) {
         for (ScrapResult result : results) {
             final String url = result.getUrl();
             final String word = result.getWord();
             final int count = result.getCount();
-            out.println(String.format("%s | %s | %s", url, word, count));
+            log.info(String.format("%s | %s | %s", url, word, count));
         }
     }
 

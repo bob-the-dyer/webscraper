@@ -6,7 +6,7 @@
 
     <groupId>ru.spb.kupchinolabs</groupId>
     <artifactId>webscraper</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.8-SNAPSHOT</version>
 
     <build>
         <plugins>

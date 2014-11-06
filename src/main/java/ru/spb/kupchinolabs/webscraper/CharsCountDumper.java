@@ -6,12 +6,16 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
+import java.util.logging.Logger;
+
 import static java.lang.String.format;
 import static java.lang.System.out;
 
 public class CharsCountDumper {
 
+    private final static Logger log = Logger.getLogger(CharsCountDumper.class.getName());
+
     public void dump(String url, int count) {
-        out.println(format("%s has %d characters", url, count));
+        log.info(format("%s has %d characters", url, count));
     }
 }

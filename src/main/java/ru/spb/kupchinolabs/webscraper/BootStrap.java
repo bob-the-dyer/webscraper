@@ -8,7 +8,10 @@ package ru.spb.kupchinolabs.webscraper;
 
 import org.apache.commons.cli.*;
 
-import static java.lang.System.err;
+import java.io.IOException;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import static java.lang.System.out;
 import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
@@ -16,10 +19,13 @@ public class BootStrap {
 
     final static private Options options = constructOptions();
 
-    public static void main(String[] args) {
-        out.println("-------------------------------");
-        out.println("-- Welcome to webscraper 1.0 --");
-        out.println("-------------------------------");
+    public static void main(String[] args) throws IOException {
+
+        LogManager.getLogManager().readConfiguration(BootStrap.class.getResourceAsStream("/logging.properties"));
+
+        final Logger log = Logger.getLogger(BootStrap.class.getName());
+
+        log.info("Welcome to webscraper v0.8");
 
         final CommandLine cmd = cmd(args);
 
@@ -27,15 +33,11 @@ public class BootStrap {
             try {
                 dispatchCommands(cmd);
             } catch (Exception e) {
-                err.println("------------------------------------------");
-                err.println("-- Webscraper has done with some errors --");
-                err.println("------------------------------------------");
-                err.println(e.getMessage());
+                log.warning("Webscraper v0.8 has done with some errors");
+                log.warning(e.getMessage());
                 return;
             }
-            out.println("----------------------------------------");
-            out.println("-- Webscraper has done with no errors --");
-            out.println("----------------------------------------");
+            log.info("Webscraper v0.8 has done with no errors");
         }
     }
 

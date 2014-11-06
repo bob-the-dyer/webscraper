@@ -12,11 +12,13 @@ import org.apache.commons.cli.Options;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
-import static java.lang.System.out;
 import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
 public class CommandsDispatcher {
+
+    private final static Logger log = Logger.getLogger(CommandsDispatcher.class.getName());
 
     public static boolean dispatch(CommandLine cmd, Options options) {
         //TODO verbose
@@ -37,16 +39,16 @@ public class CommandsDispatcher {
                 goodOptions = true;
             }
             if (!goodOptions) {
-                out.println("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
+                log.severe("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
                 new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, options, true);
             }
             return goodOptions;
         } else if (cmd.hasOption(FILE_OPTION)) {
-            out.println(FILE_OPTION + " option is not supported yet");
+            log.warning(FILE_OPTION + " option is not supported yet");
             //TODO logic for file
             return true;
         } else {
-            out.println("Neither " + URL_OPTION + " nor " + FILE_OPTION + " commands were specified.");
+            log.severe("Neither " + URL_OPTION + " nor " + FILE_OPTION + " commands were specified.");
             new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, options, true);
             return false;
         }

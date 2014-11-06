@@ -18,7 +18,7 @@ import static java.lang.String.format;
 
 public class WordsScraper {
 
-    static { //disabling loggin for HtmlUnit
+    static { //disabling logging for HtmlUnit
         java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
     }

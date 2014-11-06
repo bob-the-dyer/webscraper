@@ -25,7 +25,7 @@ public class BootStrap {
 
         if (cmd != null) {
             try {
-                dispatchProcessing(cmd);
+                dispatchCommands(cmd);
             } catch (Exception e) {
                 err.println("------------------------------------------");
                 err.println("-- Webscraper has done with some errors --");
@@ -39,8 +39,8 @@ public class BootStrap {
         }
     }
 
-    protected static boolean dispatchProcessing(CommandLine cmd) {
-        return ScrapController.dispatchProcessing(cmd, options);
+    protected static boolean dispatchCommands(CommandLine cmd) {
+        return CommandsDispatcher.dispatch(cmd, options);
     }
 
     protected static CommandLine cmd(String[] args) {

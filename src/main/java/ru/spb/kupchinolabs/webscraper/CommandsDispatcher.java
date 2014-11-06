@@ -16,27 +16,20 @@ import java.util.List;
 import static java.lang.System.out;
 import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
-public class ScrapController {
+public class CommandsDispatcher {
 
-    public static boolean dispatchProcessing(CommandLine cmd, Options options) {
+    public static boolean dispatch(CommandLine cmd, Options options) {
         //TODO verbose
+        boolean verbose = cmd.hasOption(VERBOSE_OPTION);
         if (cmd.hasOption(URL_OPTION)) {
             boolean goodOptions = false;
             if (cmd.hasOption(CHARS_COUNT_OPTION)) {
-                boolean verbose = false;
-                if (cmd.hasOption(VERBOSE_OPTION)) {
-                    verbose = true;
-                }
                 final String url = cmd.getOptionValue(URL_OPTION);
                 final int count = new CharsCounter().count(url);
                 new CharsCountDumper().dump(url, count);
                 goodOptions = true;
             }
             if (cmd.hasOption(WORDS_OPTION) && cmd.hasOption(WORDS_COUNT_OPTION)) {
-                boolean verbose = false;
-                if (cmd.hasOption(VERBOSE_OPTION)) {
-                    verbose = true;
-                }
                 final String url = cmd.getOptionValue(URL_OPTION);
                 final String words = cmd.getOptionValue(WORDS_OPTION);
                 final List<ScrapResult> results = new WordsScraper().scrap(url, Arrays.asList(words.split(",")));

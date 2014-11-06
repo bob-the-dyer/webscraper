@@ -33,21 +33,21 @@ public class TestBootStrap {
     public void testMandatoryCommandsUrlOrFile() throws IOException {
         final BootStrap bootStrap = new BootStrap();
         final CommandLine cmd = bootStrap.cmd(new String[]{"-words", "Greece,default", "–v", "–w", "–c", "–e"});
-        assertFalse(bootStrap.dispatchProcessing(cmd));
+        assertFalse(bootStrap.dispatchCommands(cmd));
     }
 
     @Test
     public void testMandatoryCommandsWordsAndCounts() throws IOException {
         final BootStrap bootStrap = new BootStrap();
         CommandLine cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "scraping,mining", "-v"});
-        assertFalse(bootStrap.dispatchProcessing(cmd));
+        assertFalse(bootStrap.dispatchCommands(cmd));
         cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-w"});
-        assertFalse(bootStrap.dispatchProcessing(cmd));
+        assertFalse(bootStrap.dispatchCommands(cmd));
         cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "scraping,mining", "-c"});
-        assertTrue(bootStrap.dispatchProcessing(cmd));
+        assertTrue(bootStrap.dispatchCommands(cmd));
         cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-words", "scraping,mining", "-c", "-w"});
-        assertTrue(bootStrap.dispatchProcessing(cmd));
+        assertTrue(bootStrap.dispatchCommands(cmd));
         cmd = bootStrap.cmd(new String[]{"-url", "http://en.wikipedia.org/wiki/Web_scraping", "-c"});
-        assertTrue(bootStrap.dispatchProcessing(cmd));
+        assertTrue(bootStrap.dispatchCommands(cmd));
     }
 }

@@ -36,7 +36,9 @@ What webscraper does and does not
 
 7. Uses [HtmlUnit](http://htmlunit.sourceforge.net) under the hood.
 
-8. No map/reduce technique at the moment, no any performance optimization 
+8. No map/reduce technique at the moment, no any performance optimization. 
+
+9. Runs headless as a pure console application.                                
   
 Prerequisites
 -------------
@@ -69,3 +71,5 @@ Open questions
 3. “Do not use 3rd party libraries” - I always use 3rd parties, who doesn't... Does the point here not to use 3rd party web scraper library or no any libs allowed at all and that’s critical in this test task indeed?
 
 4. Should I use some kind of map-reduce technique to boost performance in case of really big pages or a big number of urls in file. Should I care about performance at all in this test task?
+
+5. Should scraper run headless only or it can open UI on background?

@@ -6,12 +6,9 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
-import org.omg.CORBA.INTERNAL;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class FrameTester {

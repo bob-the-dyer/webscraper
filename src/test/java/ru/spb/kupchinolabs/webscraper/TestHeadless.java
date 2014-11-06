@@ -32,8 +32,7 @@ public class TestHeadless {
     @Test(expected = HeadlessException.class)
     public void testHeadlessPanel() throws IOException {
         System.setProperty("java.awt.headless", "true");
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        assertTrue(ge.isHeadless());
+        assertTrue(GraphicsEnvironment.isHeadless());
 
         final Panel panel = new Panel();
         final JEditorPane pane = new JEditorPane();
@@ -56,25 +55,19 @@ public class TestHeadless {
     public void testWebEngine() {
         System.setProperty("java.awt.headless", "true");
         CountDownLatch latch = new CountDownLatch(1);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                new JFXPanel();
-                final WebView webView = new WebView();
-                final WebEngine webEngine = webView.getEngine();
-                webEngine.getLoadWorker().stateProperty().addListener(
-                        new ChangeListener<Worker.State>() {
-                            @Override
-                            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                                if (newValue == Worker.State.SUCCEEDED) {
-                                    System.out.println(webEngine.getDocument());
-                                    //TODO process DOM?
-                                    latch.countDown();
-                                }
-                            }
-                        });
-                webEngine.load("http://javafx.com");
-            }
+        Platform.runLater(() -> {
+            new JFXPanel();
+            final WebView webView = new WebView();
+            final WebEngine webEngine = webView.getEngine();
+            webEngine.getLoadWorker().stateProperty().addListener(
+                    (observable, oldValue, newValue) -> {
+                        if (newValue == Worker.State.SUCCEEDED) {
+                            System.out.println(webEngine.getDocument());
+                            //TODO process DOM?
+                            latch.countDown();
+                        }
+                    });
+            webEngine.load("http://javafx.com");
         });
         try {
             latch.await();

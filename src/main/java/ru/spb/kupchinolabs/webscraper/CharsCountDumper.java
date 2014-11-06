@@ -9,7 +9,6 @@ package ru.spb.kupchinolabs.webscraper;
 import java.util.logging.Logger;
 
 import static java.lang.String.format;
-import static java.lang.System.out;
 
 public class CharsCountDumper {
 

@@ -6,7 +6,6 @@
 
 package ru.spb.kupchinolabs.webscraper;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
@@ -43,6 +42,7 @@ public class TestHtmlUnit {
         System.out.println(((HtmlPage) webClient.getPage("http://en.wikipedia.org/wiki/Web_scraping")).asText());
         System.out.println(((HtmlPage) webClient.getPage("http://plugins.jetbrains.com/plugin/7527?pr=idea")).asText());
         System.out.println(((HtmlPage) webClient.getPage("https://github.com/bob-the-dyer/webscraper")).asText());
+// BAD       System.out.println(((HtmlPage) webClient.getPage("http://www.hireright.com")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://drozd4j.postach.io")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://habrahabr.ru")).asText());
 // BAD       System.out.println(((HtmlPage) webClient.getPage("http://lifehacker.ru")).asText());

@@ -61,18 +61,21 @@ public class BootStrap {
         options.addOption(new Option(CHARS_COUNT_OPTION, false, "count number of characters of each web page"));
         options.addOption(new Option(SENTENCES_OPTION, false, "extract sentences which contain given words"));
         options.addOption(new Option(VERBOSE_OPTION, false, "output verbosity flag, if on then the output should contains information about time spent on data scraping and data processing"));
-        options.addOption(OptionBuilder.withArgName("path")
-                .hasArg()
-                .withDescription("path to plain text file containing a list of URLs")
-                .create(FILE_OPTION));
-        options.addOption(OptionBuilder.withArgName("url")
-                .hasArg()
-                .withDescription("web resources URL")
-                .create(URL_OPTION));
-        options.addOption(OptionBuilder.withArgName("words")
-                .hasArg()
-                .withDescription("word or list of words with ',' delimiter")
-                .create(WORDS_OPTION));
+        options.addOption(
+                OptionBuilder.withArgName("path")
+                        .hasArg()
+                        .withDescription("path to plain text file containing a list of URLs")
+                        .create(FILE_OPTION));
+        options.addOption(
+                OptionBuilder.withArgName("url")
+                        .hasArg()
+                        .withDescription("web resources URL")
+                        .create(URL_OPTION));
+        options.addOption(
+                OptionBuilder.withArgName("words")
+                        .hasArg()
+                        .withDescription("word or list of words with ',' delimiter")
+                        .create(WORDS_OPTION));
         return options;
     }
 }

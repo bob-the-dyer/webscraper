@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static java.lang.String.format;
 import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
 public class CommandsDispatcher {
@@ -21,8 +22,8 @@ public class CommandsDispatcher {
     private final static Logger log = Logger.getLogger(CommandsDispatcher.class.getName());
 
     public static boolean dispatch(CommandLine cmd, Options options) {
-        //TODO verbose
         boolean verbose = cmd.hasOption(VERBOSE_OPTION);
+        final long start = System.currentTimeMillis();
         if (cmd.hasOption(URL_OPTION)) {
             boolean goodOptions = false;
             if (cmd.hasOption(CHARS_COUNT_OPTION)) {
@@ -41,6 +42,10 @@ public class CommandsDispatcher {
             if (!goodOptions) {
                 log.severe("Either " + WORDS_COUNT_OPTION + " or " + CHARS_COUNT_OPTION + " commands were specified incorrectly.");
                 new HelpFormatter().printHelp(COMMAND_LINE_EXAMPLE, options, true);
+            } else {
+                if (verbose) {
+                    log.info(format("Scraping and processing has taken %d millis", System.currentTimeMillis() - start));
+                }
             }
             return goodOptions;
         } else if (cmd.hasOption(FILE_OPTION)) {

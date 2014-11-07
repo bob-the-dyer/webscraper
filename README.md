@@ -19,14 +19,14 @@ Console [web scraper](http://en.wikipedia.org/wiki/Web_scraping) utility which:
 
 3. Data processing results are printed to output for each web resources separately and for all resources as total.
     
-What webscraper does and does not
----------------------------------
+What webscraper does and does not:
+----------------------------------
 
 1. Does not process urls recursively, for traversing all urls web crawler should be used instead, list of pages could be provided in a file instead.
   
-2. Does not scrap dynamical pages with Javascript and AJAX.
+2. Does not scrap dynamical pages with Javascript, AJAX and errors on pages.
   
-3. Processes statical pages with __well-formed HTML only__.  HtmlCleaner could be considered to be plugged in order to convert any html to XML compliant document.
+3. Processes statical pages with __well-formed HTML only__ (HtmlCleaner could be considered to be plugged in order to convert any html to XML compliant document later).
   
 4. No authentication and popups handling capabilities.
 
@@ -38,10 +38,10 @@ What webscraper does and does not
 
 8. No map/reduce technique at the moment, no any performance optimization. 
 
-9. Runs headless as a pure console application.                                
+9. Runs headless as a pure java console application.                                
   
-Prerequisites
--------------
+Prerequisites:
+--------------
 
 Internet connection
 
@@ -49,20 +49,21 @@ Maven 3.1.1+ installed
 
 Java 1.8+ installed
 
-Build from sources
-------------------
+How to build from sources and run:
+----------------------------------
 
     cd webscraper
     mvn -DskipTests=true install
     cd target
-    
-Command line parameters example
--------------------------------
+    java -jar webscraper-jar-with-dependencies.jar [-c] [-e] [-file <path>] [-url <url>] [-v] [-w] [-words <words>]
 
-    java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler -v -w -c -e   
+Example of command line parameters:
+-----------------------------------
 
-Open questions
---------------
+    java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler,42 -v -w -c -e   
+
+Open questions:
+---------------
 
 1. How to deal with html tags, css and javascript code, because I suppose they should’t be counted as chars or treated as data (skipping them all at the moment)
 

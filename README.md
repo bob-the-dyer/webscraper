@@ -53,7 +53,7 @@ Build from sources
 ------------------
 
     cd webscraper
-    mvn install
+    mvn -DskipTests=true install
     cd target
     
 Command line parameters example

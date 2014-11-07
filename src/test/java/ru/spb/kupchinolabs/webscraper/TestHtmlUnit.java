@@ -7,6 +7,7 @@
 package ru.spb.kupchinolabs.webscraper;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
 
@@ -41,18 +42,28 @@ public class TestHtmlUnit {
 
         List<String> goodSites = Arrays.asList(
                 "https://www.facebook.com",
-                "https://www.google.ru",
+                "http://www.google.ru",
                 "https://www.twitter.com",
                 "http://vk.com/feed",
-                "https://www.linkedin.com",
+                "http://www.linkedin.com",
                 "http://zenhabits.net",
                 "http://en.wikipedia.org/wiki/Web_scraping",
                 "http://plugins.jetbrains.com/plugin/7527?pr=idea",
-                "https://github.com/bob-the-dyer/webscraper"
+                "http://github.com/bob-the-dyer/webscraper"
         );
-        for (String goodSite : goodSites) {
-            out.println(((HtmlPage) webClient.getPage(goodSite)).asText());
-        }
+
+        goodSites.stream()
+                .map(goodSite -> {
+                    try {
+                        return (HtmlPage) webClient.getPage(goodSite);
+                    } catch (IOException e) {
+                        fail();
+                        return null;
+                    }
+                })
+                .map(DomNode::asText)
+                .forEach(out::println);
+
 
         List<String> badSites = Arrays.asList(
                 "http://www.hireright.com",
@@ -63,13 +74,18 @@ public class TestHtmlUnit {
                 "http://hh.ru",
                 "http://yandex.ru"
         );
-        for (String badSite : badSites) {
-            try {
-                out.println(((HtmlPage) webClient.getPage(badSite)).asText());
-                fail();
-            } catch (Exception e) {
-            }
-        }
+
+        badSites.stream()
+                .map(badSite -> {
+                    try {
+                        final HtmlPage page = webClient.getPage(badSite);
+                        fail();
+                        return page;
+                    } catch (IOException e) {
+                        return null;
+                    }
+                });
+
     }
 
 }

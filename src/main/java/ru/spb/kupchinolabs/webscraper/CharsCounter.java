@@ -9,16 +9,9 @@ package ru.spb.kupchinolabs.webscraper;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import java.util.logging.Level;
-
 import static java.lang.String.format;
 
 public class CharsCounter {
-
-    static { //disabling logging for HtmlUnit
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
-    }
 
     public int count(String url) {
         final WebClient webClient = new WebClient();

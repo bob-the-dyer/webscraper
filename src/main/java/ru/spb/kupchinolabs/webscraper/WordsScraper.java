@@ -11,19 +11,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
 public class WordsScraper {
 
-    static { //disabling logging for HtmlUnit
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
-    }
-
     public List<ScrapResult> scrap(String url, List<String> words) {
-        List<ScrapResult> results = new LinkedList<>();
         final WebClient webClient = new WebClient();
         final HtmlPage htmlPage;
         try {
@@ -35,18 +29,17 @@ public class WordsScraper {
         final String pageAsText = htmlPage.asText().toLowerCase();
         String page = pageAsText.substring(titleText.length());
 
-        //TODO consider tokenizer to boost performance and search all words within single iteration
-
-        for (String word : words) {
-            int wordCount = 0;
-            int indexOf = 0;
-            final String wordLowerCased = word.toLowerCase();
-            while ((indexOf = page.indexOf(wordLowerCased, indexOf)) != -1) {
-                wordCount++;
-                indexOf += word.length();
-            }
-            results.add(new ScrapResult(url, word, wordCount, null));
-        }
-        return results;
+        return words.stream()
+                .map(String::toLowerCase)
+                .map(word -> {
+                    int wordCount = 0;
+                    int indexOf = 0;
+                    while ((indexOf = page.indexOf(word, indexOf)) != -1) {
+                        wordCount++;
+                        indexOf += word.length();
+                    }
+                    return new ScrapResult(url, word, wordCount, null);
+                })
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

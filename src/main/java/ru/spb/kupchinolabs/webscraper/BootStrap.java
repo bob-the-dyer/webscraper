@@ -9,6 +9,7 @@ package ru.spb.kupchinolabs.webscraper;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -16,6 +17,12 @@ import static java.lang.System.out;
 import static ru.spb.kupchinolabs.webscraper.Constants.*;
 
 public class BootStrap {
+
+    static {
+        //disabling logging for HtmlUnit
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+    }
 
     final static private Options options = constructOptions();
 

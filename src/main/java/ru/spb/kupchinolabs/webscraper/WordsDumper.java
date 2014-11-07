@@ -14,12 +14,12 @@ public class WordsDumper {
     private final static Logger log = Logger.getLogger(WordsDumper.class.getName());
 
     public void dump(List<ScrapResult> results) {
-        for (ScrapResult result : results) {
+        results.forEach(result -> {
             final String url = result.getUrl();
             final String word = result.getWord();
             final int count = result.getCount();
-            log.info(String.format("%s | %s | %s", url, word, count));
-        }
+            log.info(String.format("%s | %s | %d", url, word, count));
+        });
     }
 
 }

@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.System.out;
 import static org.junit.Assert.assertTrue;
@@ -49,18 +50,19 @@ public class TestHtmlUnit {
                 "http://zenhabits.net",
                 "http://en.wikipedia.org/wiki/Web_scraping",
                 "http://plugins.jetbrains.com/plugin/7527?pr=idea",
-                "http://github.com/bob-the-dyer/webscraper"
+                "https://github.com/bob-the-dyer/webscraper"
         );
 
         goodSites.stream()
                 .map(goodSite -> {
                     try {
-                        return (HtmlPage) webClient.getPage(goodSite);
-                    } catch (IOException e) {
+                        return Optional.<HtmlPage>of(webClient.getPage(goodSite));
+                    } catch (Exception e) {
                         fail();
-                        return null;
+                        return Optional.<HtmlPage>of(null);
                     }
                 })
+                .map(Optional::get)
                 .map(DomNode::asText)
                 .forEach(out::println);
 
@@ -75,17 +77,13 @@ public class TestHtmlUnit {
                 "http://yandex.ru"
         );
 
-        badSites.stream()
-                .map(badSite -> {
-                    try {
-                        final HtmlPage page = webClient.getPage(badSite);
-                        fail();
-                        return page;
-                    } catch (IOException e) {
-                        return null;
-                    }
-                });
-
+        badSites.forEach(badSite -> {
+            try {
+                webClient.getPage(badSite);
+                fail();
+            } catch (Exception e) {
+            }
+        });
     }
 
 }

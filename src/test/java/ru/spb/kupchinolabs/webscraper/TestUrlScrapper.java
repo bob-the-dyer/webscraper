@@ -18,8 +18,8 @@ public class TestUrlScrapper {
     public void testWikiPage() {
         final List<ScrapResult> scrap = new WordsScraper().scrap("http://en.wikipedia.org/wiki/Web_scraping", Arrays.asList("scraping", "Mining", "Crawler", "bible"));
         assertEquals(34, scrap.get(0).getCount());
-        assertEquals(2,  scrap.get(1).getCount());
-        assertEquals(2,  scrap.get(2).getCount());
-        assertEquals(0,  scrap.get(3).getCount());
+        assertEquals(2, scrap.get(1).getCount());
+        assertEquals(2, scrap.get(2).getCount());
+        assertEquals(0, scrap.get(3).getCount());
     }
 }

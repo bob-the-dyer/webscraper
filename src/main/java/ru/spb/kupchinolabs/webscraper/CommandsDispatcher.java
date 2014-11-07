@@ -25,7 +25,7 @@ public class CommandsDispatcher {
         boolean verbose = cmd.hasOption(VERBOSE_OPTION);
         final long start = System.currentTimeMillis();
         if (cmd.hasOption(URL_OPTION)) {
-            if (cmd.hasOption(SENTENCES_OPTION)){
+            if (cmd.hasOption(SENTENCES_OPTION)) {
                 log.warning(SENTENCES_OPTION + " option is not supported yet");
                 //TODO logic for sentences
             }

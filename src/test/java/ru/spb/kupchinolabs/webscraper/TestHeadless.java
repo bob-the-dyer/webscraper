@@ -8,8 +8,6 @@ package ru.spb.kupchinolabs.webscraper;
 
 import de.saxsys.javafx.test.JfxRunner;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.web.WebEngine;

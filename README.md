@@ -43,22 +43,22 @@ What webscraper does and does not:
 Prerequisites:
 --------------
 
-Internet connection
+1. Internet connection
 
-Maven 3.1.1+ installed 
+2. JDK 1.8+ installed
 
-Java 1.8+ installed
+3. Maven 3.1.1+ installed
 
-How to build from sources and run:
-----------------------------------
+How to build from sources and execute:
+--------------------------------------
 
     cd webscraper
     mvn -DskipTests=true install
     cd target
     java -jar webscraper-jar-with-dependencies.jar [-c] [-e] [-file <path>] [-url <url>] [-v] [-w] [-words <words>]
 
-Example of command line parameters:
------------------------------------
+Example of valid command line:
+------------------------------
 
     java -jar webscraper-jar-with-dependencies.jar -url http://en.wikipedia.org/wiki/Web_scraping -words scraping,crawler,42 -v -w -c -e   
 
